@@ -23,6 +23,16 @@ SHA-256: `87f2e8eb8fb8bee1e1f100a7082a3d83e35519406773b11a7834e41231614c8c`
 - Movement history and foreground synchronization with the web dashboard.
 - Encrypted local drafts/cache and review of interrupted operations; no automatic POST replay.
 
+## Mobile operations and the web dashboard
+
+Use this app on the ground to photograph and register arrivals, confirm ISO 6346 container identities, assign actual yard positions, relocate containers, and record dispatches. The website is the desktop view for yard maps, occupancy, inventory, movement history, filtering, and exports. Its Register Container tab and registration shortcuts have been removed; mobile registration still uses the same existing API.
+
+Both clients share one backend and database. Mobile writes become visible on the website through `/api/state` reads every 30 seconds while the dashboard is visible, or when the page regains focus, becomes visible, or reconnects. Existing web move, dispatch, verification, and administration controls are still available; the website is not fully read-only.
+
+No app code change or new APK is needed for the website-tab removal. The APK linked above continues to use the existing deployed API. The [Yardline Project repository](https://github.com/bhavya03-03/Yardline-Project) contains both source projects and a shared overview.
+
+Integration references: [API contract](MOBILE_API_CONTRACT.md), [backend integration audit](MOBILE_INTEGRATION.md), and [implementation guide](MOBILE_IMPLEMENTATION_GUIDE.md). These guides include historical findings and proposals; use this README for the current mobile project location and capabilities.
+
 ## Existing backend
 
 The default API is `https://yardline-bhavya0303.netlify.app`. Tap **Enter demo yard** to select the existing operator persona. The current deployment reports demo authentication and PostgreSQL persistence. The web application remains in the separate [Yardline repository](https://github.com/bhavya03-03/Yardline).
